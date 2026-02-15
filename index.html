@@ -1073,9 +1073,19 @@
             </div>
         </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
     <script>
-        const app = {
+        
+	const SUPABASE_URL = "cnbwoqqvkzmbrsvxagha";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNuYndvcXF2a3ptYnJzdnhhZ2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNjk2OTYsImV4cCI6MjA4Njc0NTY5Nn0.jAghBhJt4bfbHb4AsRiXygX_LVQKdUSMgo_w0VGvA2k";
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+	const app = {
             data: {
                 semesterName: 'Fall 2025',
                 batches: [
@@ -2474,15 +2484,20 @@ message += '\n';
             },
 
             saveData() {
-                const data = {
-                    semesterName: this.data.semesterName,
-                    batches: this.data.batches,
-                    courses: this.data.courses,
-                    teachers: this.data.teachers,
-                    rooms: this.data.rooms,
-                    routine: this.data.routine,
-                    sectionRooms: this.data.sectionRooms,
-                    timeSlots: this.data.timeSlots
+                async saveData() {
+    const { error } = await supabase
+        .from('routine')
+        .update({ data: this.data })
+        .eq('id', 1);
+
+    if (error) {
+        alert("Save failed");
+        console.log(error);
+    } else {
+        alert("Saved online!");
+    }
+}
+
                 };
 
                 const dataStr = JSON.stringify(data, null, 2);
@@ -2499,46 +2514,19 @@ message += '\n';
             },
 
             loadData() {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = '.json';
-                
-                input.onchange = (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            try {
-                                const loadedData = JSON.parse(event.target.result);
-                                this.data = {
-                                    semesterName: loadedData.semesterName || 'Fall 2025',
-                                    batches: loadedData.batches || this.data.batches,
-                                    courses: loadedData.courses || this.data.courses,
-                                    teachers: loadedData.teachers || this.data.teachers,
-                                    rooms: loadedData.rooms || this.data.rooms,
-                                    routine: loadedData.routine || {},
-                                    sectionRooms: loadedData.sectionRooms || {},
-                                    timeSlots: loadedData.timeSlots || this.data.timeSlots,
-                                    currentSemester: 1
-                                };
-                                localStorage.removeItem('classRoutineData');
-                                this.autoSave();
-                                this.initRoutine();
-                                this.renderBatchConfig();
-                                this.renderInfoTab();
-                                this.renderRoutines();
-                                this.renderSidebar();
-                                this.renderTeachersSchedule();
-                                this.showToast('Routine loaded successfully!', 'success');
-                            } catch (error) {
-                                this.showToast('Error loading file: Invalid JSON', 'error');
-                            }
-                        };
-                        reader.readAsText(file);
-                    }
-                };
-                
-                input.click();
+                async loadData() {
+    const { data, error } = await supabase
+        .from('routine')
+        .select('*')
+        .eq('id', 1)
+        .single();
+
+    if (!error && data) {
+        this.data = data.data;
+        this.renderAll();
+    }
+}
+
             },
 
             exportToPDF() {
@@ -2575,6 +2563,10 @@ message += '\n';
 
         window.addEventListener('DOMContentLoaded', () => {
             app.init();
+window.onload = () => {
+    app.loadData();
+};
+
         });
     </script>
 </body>
