@@ -55,7 +55,7 @@
             left: 0;
             right: 0;
             background: white;
-            padding: 12px 20px;
+            padding: 12px 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 999;
             display: flex;
@@ -98,7 +98,7 @@
         }
 
         .tab {
-            padding: 8px 16px;  /* Customize tab padding */
+            padding: 8px 12px;  /* Customize tab padding */
             background: rgba(255, 255, 255, 0.2);
             border: none;
             cursor: pointer;
@@ -199,8 +199,8 @@
         .batch-routine-header {
             text-align: center;
             margin-bottom: 5px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;  /* Reduced from 10px to reduce gap */
+            /* border-bottom removed */
             display: flex;
             align-items: flex-start;  /* Align to top */
             justify-content: center;
@@ -258,6 +258,10 @@
             font-size: 18px;
             font-weight: 700;
             color: #000;
+            display: inline-block;
+            border: 1.5px solid #000;
+            border-radius: 6px;
+            padding: 2px 12px;
         }
 
         /* ========================================
@@ -380,6 +384,162 @@
         }
 
         /* ========================================
+           REGULAR ROUTINE TABLE
+           4 days × 4 time slots structure
+           ======================================== */
+        .regular-room-header {
+            margin: 15px 20px 10px 20px;
+        }
+
+        .regular-room-drop-zone {
+            display: inline-block;
+            min-width: 120px;
+            padding: 6px 12px;
+            border: 2px dashed #999;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #666;
+            cursor: default;
+            transition: all 0.2s;
+        }
+
+        .regular-room-drop-zone:hover {
+            border-color: var(--secondary-color);
+            background: #f0f8ff;
+        }
+
+        .regular-room-drop-zone.has-room {
+            border: none;  /* No border when room assigned */
+            background: transparent;
+            color: #000;  /* Pure black like Room No. text */
+            padding: 6px 0;  /* Adjust padding since no border */
+        }
+
+        .regular-routine-table {
+            width: calc(100% - 40px);
+            margin: 0 20px 20px 20px;
+            border-collapse: collapse;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .regular-routine-table th {
+            background: #bad3e6;
+            border: 1px solid var(--border-color);
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 800;  /* Bold for headers */
+            color: #000;
+        }
+
+        .regular-routine-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            vertical-align: top;
+            min-height: 60px;
+        }
+
+        .regular-routine-table .day-column {
+            width: 100px;
+            font-size: 12px;
+            font-weight: 800;  /* Bold for day column header */
+        }
+
+        .regular-routine-table .break-column {
+            width: 80px;  /* Narrower than other columns */
+            background: #f9f9f9 !important;
+            pointer-events: none !important;  /* Completely disable all interaction */
+            cursor: default !important;
+            user-select: none !important;
+        }
+
+        .regular-routine-table .break-column-inactive {
+            width: 80px !important;
+            background: #f9f9f9 !important;
+            pointer-events: none !important;
+            cursor: default !important;
+            user-select: none !important;
+        }
+
+        .regular-routine-table .prayer-lunch-col {
+            width: 80px !important;
+            background: #f9f9f9 !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            pointer-events: none !important;
+            cursor: default !important;
+            user-select: none !important;
+        }
+
+        .regular-routine-table .day-cell {
+            background: #f8f9fa;
+            font-weight: 800;  /* Bold for day cells */
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .regular-routine-cell {
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 60px;
+            font-size: 12px;
+            border: 1px solid var(--border-color) !important;  /* Explicit border */
+        }
+
+        /* Remove hover effect */
+        /* .regular-routine-cell:hover removed */
+
+        .regular-routine-cell .cell-course {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;  /* Pure black */
+            margin-bottom: 2px;
+        }
+
+        .regular-routine-cell .cell-teacher {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;  /* Pure black - same as course */
+            margin-bottom: 2px;
+        }
+
+        .regular-routine-cell .cell-room {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;  /* Pure black - same as others */
+            /* No italic */
+        }
+
+        /* Hover effects for regular routine cell items */
+        .regular-routine-cell .cell-course:hover,
+        .regular-routine-cell .cell-teacher:hover,
+        .regular-routine-cell .cell-room:hover {
+            color: var(--danger-color);  /* Red color on hover, same as diploma */
+        }
+
+        /* Overlap highlighting for regular routine cells */
+        .regular-routine-cell.overlap {
+            background: #ffebee !important;
+            border: 2px solid var(--danger-color) !important;
+        }
+
+        .break-cell {
+            background: #f9f9f9;
+            color: #999;
+            font-size: 12px;
+            vertical-align: middle;  /* Center vertically */
+            text-align: center;
+        }
+
+        /* ========================================
            TEACHER/FACULTY INFO BOX
            Contact information below each batch
            ======================================== */
@@ -389,7 +549,7 @@
             font-size: 10px;  /* Customize teacher info font size */
             background: #f9f9f9;
             border-radius: 8px;
-            margin: 0 10px;   /* 10px left and right padding */
+            margin: 0 20px;   /* Match table left/right margin (20px) */
         }
 
         .teacher-info-box h4 {
@@ -427,6 +587,57 @@
             background: #f8f9fa;
             border-radius: 12px 12px 0 0;
             border-bottom: 2px solid #ddd;
+        }
+
+        /* Sidebar header with batch type tabs */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0;
+            padding: 12px 15px;
+            font-size: 14px;
+            background: #f8f9fa;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+        }
+
+        .batch-type-tabs {
+            display: flex;
+            gap: 5px;
+            background: #e0e0e0;
+            padding: 3px;
+            border-radius: 5px;
+        }
+
+        .batch-type-tab {
+            padding: 6px 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;  /* Match Resources title font size */
+            font-weight: 600;
+            border-radius: 4px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .batch-type-tab.active {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+
+        .batch-type-tab:hover {
+            color: var(--primary-color);
         }
 
         .sidebar-section {
@@ -571,6 +782,56 @@
         .batch-config h3 {
             margin-bottom: 15px;
             color: var(--primary-color);
+        }
+
+        /* Batch Config Header with Tabs */
+        .batch-config-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .batch-config-header h3 {
+            margin: 0;
+        }
+
+        .batch-config-tabs {
+            display: flex;
+            gap: 5px;
+            background: #f0f0f0;
+            padding: 3px;
+            border-radius: 6px;
+        }
+
+        .batch-config-tab {
+            padding: 6px 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .batch-config-tab.active {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .batch-config-tab:hover {
+            color: var(--primary-color);
+        }
+
+        .batch-config-content {
+            display: none;
+        }
+
+        .batch-config-content.active {
+            display: block;
         }
 
         /* Semester name input field */
@@ -838,6 +1099,73 @@
             font-size: 12px;
         }
 
+        /* ========================================
+           COURSE DISTRIBUTION TABLE
+           ======================================== */
+        .course-distribution-card {
+            margin-bottom: 40px;
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .course-distribution-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .course-distribution-table th {
+            background: #cbe0b1;  /* Header color from doc */
+            font-size: 12px;
+            font-weight: 800;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+            color: #000;
+        }
+
+        .course-distribution-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .course-distribution-table .sl-no {
+            text-align: center;
+            width: 60px;
+        }
+
+        .course-distribution-table .faculty-name {
+            text-align: left;
+            width: 180px;
+        }
+
+        .course-distribution-table .course-info {
+            text-align: left;
+        }
+
+        .course-distribution-table .batch-section {
+            text-align: center;
+            width: 120px;
+        }
+
+        .course-distribution-table .credits {
+            text-align: center;
+            width: 80px;
+        }
+
+        .course-distribution-table .total-credits {
+            text-align: center;
+            width: 100px;
+            font-weight: 800;
+        }
+
         /* Toast */
         .toast {
             position: fixed;
@@ -931,7 +1259,7 @@
 
             .batch-routine {
                 page-break-after: always;
-                border: 2px solid black;
+                border: none !important;  /* No border when printing */
                 box-shadow: none;
             }
 
@@ -947,11 +1275,45 @@
                 print-color-adjust: exact;
             }
 
+            .regular-routine-table th {
+                background: #bad3e6 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .regular-routine-table .day-cell {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .regular-routine-table .break-column,
+            .regular-routine-table .break-column-inactive,
+            .regular-routine-table .prayer-lunch-col {
+                background: #f9f9f9 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .regular-room-drop-zone {
+                border: none !important;  /* No border when printing */
+            }
+
             .teachers-schedule-table th,
             .teachers-schedule-table .teacher-name-cell {
                 background: #fcdb9a !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+            }
+
+            .course-distribution-table th {
+                background: #cbe0b1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .course-distribution-card {
+                border: none !important;
             }
 
             .routine-cell.overlap {
@@ -965,10 +1327,6 @@
 
             .tab-content.active {
                 display: block !important;
-            }
-
-            .batch-routine-header {
-                border-bottom: 1px solid black;
             }
         }
 
@@ -996,9 +1354,10 @@
         <div class="tab-group">
             <div class="tab active" onclick="app.switchTab(0)">Class Routine</div>
             <div class="tab" onclick="app.switchTab(1)">Faculty Schedule</div>
-            <div class="tab" onclick="app.switchTab(2)">Settings</div>
+            <div class="tab" onclick="app.switchTab(2)">Course Distribution</div>
+            <div class="tab" onclick="app.switchTab(3)">Settings</div>
         </div>
-        <button class="success" onclick="app.checkOverlap()">✓ Check Overlap</button>
+        <button class="success" onclick="app.checkOverlap()">✓ Check</button>
         <button class="primary" onclick="app.saveData()">💾 Save</button>
         <button class="primary" onclick="app.loadData()">📂 Load</button>
         <button onclick="app.exportToPDF()">🖨️ Export PDF</button>
@@ -1012,7 +1371,13 @@
                 <div class="routine-main" id="routine-main"></div>
 
                 <div class="sidebar">
-                    <h3>📋 Resources</h3>
+                    <div class="sidebar-header">
+                        <h3>📋 Resources</h3>
+                        <div class="batch-type-tabs">
+                            <button class="batch-type-tab active" onclick="app.switchBatchType('diploma')">Dip</button>
+                            <button class="batch-type-tab" onclick="app.switchBatchType('regular')">Reg</button>
+                        </div>
+                    </div>
                     <div class="sidebar-section">
                         <h3>📚 Courses</h3>
                         <div class="semester-tabs" id="semester-tabs"></div>
@@ -1037,17 +1402,43 @@
             <div id="teachers-schedule-container"></div>
         </div>
 
-        <!-- Tab 3: Settings -->
+        <!-- Tab 3: Course Distribution -->
+        <div class="tab-content" id="tab-course-distribution">
+            <div id="course-distribution-container"></div>
+        </div>
+
+        <!-- Tab 4: Settings -->
         <div class="tab-content" id="tab-info">
             <div class="info-container">
                 <div class="batch-config">
-                    <h3>⚙️ Batch Configuration</h3>
-                    <div class="semester-input-group">
-                        <label>Semester:</label>
-                        <input type="text" id="semester-name-input" placeholder="e.g., Fall 2025">
+                    <div class="batch-config-header">
+                        <h3>⚙️ Batch Configuration</h3>
+                        <div class="batch-config-tabs">
+                            <button class="batch-config-tab active" onclick="app.switchBatchConfigTab('diploma')">Diploma</button>
+                            <button class="batch-config-tab" onclick="app.switchBatchConfigTab('regular')">Regular</button>
+                        </div>
                     </div>
-                    <div class="batch-inputs" id="batch-config-inputs"></div>
-                    <button class="primary" style="margin-top: 15px;" onclick="app.applyBatchConfig()">Apply Configuration</button>
+                    
+                    <!-- Diploma Batch Configuration -->
+                    <div class="batch-config-content active" id="diploma-batch-config">
+                        <div class="semester-input-group">
+                            <label>Semester:</label>
+                            <input type="text" id="semester-name-input" placeholder="e.g., Fall 2025">
+                        </div>
+                        <div class="batch-inputs" id="batch-config-inputs"></div>
+                        <button class="primary" style="margin-top: 15px;" onclick="app.applyBatchConfig()">Apply Configuration</button>
+                    </div>
+                    
+                    <!-- Regular Batch Configuration -->
+                    <div class="batch-config-content" id="regular-batch-config">
+                        <div class="semester-input-group">
+                            <label>Semester:</label>
+                            <input type="text" id="regular-semester-name-input" placeholder="e.g., Fall 2025" disabled style="background: #f5f5f5;">
+                            <small style="color: #666; margin-left: 10px;">(Same as Diploma semester)</small>
+                        </div>
+                        <div class="batch-inputs" id="regular-batch-config-inputs"></div>
+                        <button class="primary" style="margin-top: 15px;" onclick="app.applyRegularBatchConfig()">Apply Configuration</button>
+                    </div>
                 </div>
 
                 <div class="info-columns">
@@ -1078,6 +1469,29 @@
         const app = {
             data: {
                 semesterName: 'Fall 2025',
+                // Diploma batches (existing)
+                diplomaBatches: [
+                    { name: '1st', sections: 8, shift: 'morning' },
+                    { name: '2nd', sections: 4, shift: 'afternoon' },
+                    { name: '3rd', sections: 4, shift: 'morning' },
+                    { name: '4th', sections: 3, shift: 'afternoon' },
+                    { name: '5th', sections: 3, shift: 'afternoon' },
+                    { name: '6th', sections: 3, shift: 'afternoon' },
+                    { name: '7th', sections: 3, shift: 'morning' },
+                    { name: '8th', sections: 3, shift: 'morning' }
+                ],
+                // Regular batches (new - only 1 section each)
+                regularBatches: [
+                    { name: '1st' },
+                    { name: '2nd' },
+                    { name: '3rd' },
+                    { name: '4th' },
+                    { name: '5th' },
+                    { name: '6th' },
+                    { name: '7th' },
+                    { name: '8th' }
+                ],
+                // Backward compatibility
                 batches: [
                     { name: '1st', sections: 8, shift: 'morning' },
                     { name: '2nd', sections: 4, shift: 'afternoon' },
@@ -1208,8 +1622,9 @@
                     { name: 'Mohammad Ismail', short: 'MI', phone: '01886006867' },
                     { name: 'Mithun Chandra Sarker', short: 'MCS', phone: '01521109663' }
                 ],
-                rooms: ['2301', '2302', '3301', '3302', '4301', '4302', '5301', '5302', '6301', '6302', '7301', '7302', '8301', '8302', '1301', '1302'],
+                rooms: ['1301', '1302', '2301', '2302', '3301', '3302', '4301', '4302', '5301', '5302', '6301', '6302', '7301', '7302', '8301', '8302'],
                 sectionRooms: {},
+                // Diploma time slots (existing - Friday/Saturday)
                 timeSlots: {
                     friday: {
                         morning: [
@@ -1234,19 +1649,49 @@
                         { start: '12:00PM', end: '01:00PM' }
                     ]
                 },
-                routine: {},
+                // Regular time slots (new - 4 days with 4 time slots each)
+                regularTimeSlots: {
+                    days: ['Saturday', 'Sunday', 'Monday', 'Thursday'],
+                    slots: [
+                        { start: '09:30AM', end: '10:45AM' },
+                        { start: '10:45AM', end: '12:00PM' },
+                        { start: '12:00PM', end: '01:15PM' },
+                        { start: '02:00PM', end: '04:00PM' }
+                    ]
+                },
+                routine: {},  // Diploma routine
+                regularRoutine: {},  // Regular routine
+                regularBatchRooms: {},  // Room assignments for regular batches
+                // Tracking which system is active
+                activeBatchType: 'diploma',  // 'diploma' or 'regular'
+                activeBatchConfigTab: 'diploma',  // For settings tab
                 currentSemester: 1
             },
 
             init() {
                 this.loadFromLocalStorage();
                 this.initRoutine();
+                this.initRegularRoutine();
                 this.renderBatchConfig();
                 this.renderInfoTab();
+                this.syncBatchTypeTabs();  // Sync Dip/Reg tabs with activeBatchType
                 this.renderRoutines();
                 this.renderSidebar();
                 this.renderTeachersSchedule();
                 this.setupDragAndDrop();
+            },
+
+            syncBatchTypeTabs() {
+                // Sync the Dip/Reg tab button states with activeBatchType
+                const tabs = document.querySelectorAll('.batch-type-tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    const tabText = tab.textContent.toLowerCase();
+                    if ((tabText === 'dip' && this.data.activeBatchType === 'diploma') ||
+                        (tabText === 'reg' && this.data.activeBatchType === 'regular')) {
+                        tab.classList.add('active');
+                    }
+                });
             },
 
             loadFromLocalStorage() {
@@ -1255,6 +1700,10 @@
                     try {
                         const data = JSON.parse(saved);
                         this.data = { ...this.data, ...data };
+                        // Ensure activeBatchType defaults to 'diploma' if not present
+                        if (!this.data.activeBatchType) {
+                            this.data.activeBatchType = 'diploma';
+                        }
                     } catch (error) {
                         console.error('Error loading from localStorage:', error);
                     }
@@ -1265,12 +1714,19 @@
                 const data = {
                     semesterName: this.data.semesterName,
                     batches: this.data.batches,
+                    diplomaBatches: this.data.diplomaBatches,
+                    regularBatches: this.data.regularBatches,
                     courses: this.data.courses,
                     teachers: this.data.teachers,
                     rooms: this.data.rooms,
                     routine: this.data.routine,
+                    regularRoutine: this.data.regularRoutine,
                     sectionRooms: this.data.sectionRooms,
-                    timeSlots: this.data.timeSlots
+                    regularBatchRooms: this.data.regularBatchRooms,
+                    timeSlots: this.data.timeSlots,
+                    regularTimeSlots: this.data.regularTimeSlots,
+                    activeBatchType: this.data.activeBatchType,
+                    activeBatchConfigTab: this.data.activeBatchConfigTab
                 };
                 localStorage.setItem('classRoutineData', JSON.stringify(data));
             },
@@ -1293,6 +1749,24 @@
                 });
             },
 
+            initRegularRoutine() {
+                this.data.regularBatches.forEach(batch => {
+                    const key = batch.name;  // No sections for regular
+                    if (!this.data.regularRoutine[key]) {
+                        // 4 days × 4 time slots
+                        this.data.regularRoutine[key] = {
+                            Saturday: Array(4).fill(null).map(() => ({ course: '', teacher: '', room: '' })),
+                            Sunday: Array(4).fill(null).map(() => ({ course: '', teacher: '', room: '' })),
+                            Monday: Array(4).fill(null).map(() => ({ course: '', teacher: '', room: '' })),
+                            Thursday: Array(4).fill(null).map(() => ({ course: '', teacher: '', room: '' }))
+                        };
+                    }
+                    if (!this.data.regularBatchRooms[key]) {
+                        this.data.regularBatchRooms[key] = '';
+                    }
+                });
+            },
+
             getSectionLetters(count) {
                 return Array.from({ length: count }, (_, i) => String.fromCharCode(65 + i));
             },
@@ -1311,15 +1785,40 @@
 
                 if (index === 1) {
                     this.renderTeachersSchedule();
+                } else if (index === 2) {
+                    this.renderCourseDistribution();
+                }
+            },
+
+            switchBatchConfigTab(type) {
+                // Update active batch config tab
+                this.data.activeBatchConfigTab = type;
+                
+                // Update tab button styles
+                const tabs = document.querySelectorAll('.batch-config-tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // Show/hide config content
+                document.getElementById('diploma-batch-config').classList.toggle('active', type === 'diploma');
+                document.getElementById('regular-batch-config').classList.toggle('active', type === 'regular');
+                
+                // Sync semester name for regular
+                if (type === 'regular') {
+                    document.getElementById('regular-semester-name-input').value = this.data.semesterName;
                 }
             },
 
             renderBatchConfig() {
+                // Render Diploma batch configuration
                 const semesterInput = document.getElementById('semester-name-input');
                 if (semesterInput) {
                     semesterInput.value = this.data.semesterName;
                     semesterInput.onchange = (e) => {
                         this.data.semesterName = e.target.value;
+                        // Sync to regular semester input
+                        const regularInput = document.getElementById('regular-semester-name-input');
+                        if (regularInput) regularInput.value = e.target.value;
                         this.renderRoutines();
                         this.autoSave();
                     };
@@ -1328,40 +1827,78 @@
                 const container = document.getElementById('batch-config-inputs');
                 container.innerHTML = '';
 
-                this.data.batches.forEach((batch, index) => {
+                this.data.diplomaBatches.forEach((batch, index) => {
                     const batchDiv = document.createElement('div');
                     batchDiv.className = 'batch-input-group';
                     batchDiv.innerHTML = `
                         <label>Batch ${index + 1}</label>
-                        <input type="text" value="${batch.name}" onchange="app.updateBatchName(${index}, this.value)" placeholder="Name">
-                        <select onchange="app.updateBatchSections(${index}, this.value)">
+                        <input type="text" value="${batch.name}" onchange="app.updateDiplomaBatchName(${index}, this.value)" placeholder="Name">
+                        <select onchange="app.updateDiplomaBatchSections(${index}, this.value)">
                             ${Array.from({ length: 10 }, (_, i) => i + 1).map(num => 
                                 `<option value="${num}" ${num === batch.sections ? 'selected' : ''}>${num} ${num === 1 ? 'Section' : 'Sections'}</option>`
                             ).join('')}
                         </select>
-                        <select onchange="app.updateBatchShift(${index}, this.value)">
+                        <select onchange="app.updateDiplomaBatchShift(${index}, this.value)">
                             <option value="morning" ${batch.shift === 'morning' ? 'selected' : ''}>Morning</option>
                             <option value="afternoon" ${batch.shift === 'afternoon' ? 'selected' : ''}>Afternoon</option>
                         </select>
                     `;
                     container.appendChild(batchDiv);
                 });
+
+                // Render Regular batch configuration
+                const regularContainer = document.getElementById('regular-batch-config-inputs');
+                regularContainer.innerHTML = '';
+
+                this.data.regularBatches.forEach((batch, index) => {
+                    const batchDiv = document.createElement('div');
+                    batchDiv.className = 'batch-input-group';
+                    batchDiv.innerHTML = `
+                        <label>Batch ${index + 1}</label>
+                        <input type="text" value="${batch.name}" onchange="app.updateRegularBatchName(${index}, this.value)" placeholder="Name">
+                        <div style="font-size: 11px; color: #666; padding: 4px 0;">1 Section (Fixed)</div>
+                    `;
+                    regularContainer.appendChild(batchDiv);
+                });
+
+                // Sync regular semester name
+                const regularSemesterInput = document.getElementById('regular-semester-name-input');
+                if (regularSemesterInput) {
+                    regularSemesterInput.value = this.data.semesterName;
+                }
             },
 
-            updateBatchName(index, value) {
-                this.data.batches[index].name = value;
+            // Diploma batch update functions
+            updateDiplomaBatchName(index, value) {
+                this.data.diplomaBatches[index].name = value;
+                this.data.batches[index].name = value;  // Keep backward compatibility
                 this.autoSave();
             },
 
-            updateBatchSections(index, value) {
-                this.data.batches[index].sections = parseInt(value);
+            updateDiplomaBatchSections(index, value) {
+                this.data.diplomaBatches[index].sections = parseInt(value);
+                this.data.batches[index].sections = parseInt(value);  // Keep backward compatibility
                 this.autoSave();
             },
 
-            updateBatchShift(index, value) {
-                this.data.batches[index].shift = value;
+            updateDiplomaBatchShift(index, value) {
+                this.data.diplomaBatches[index].shift = value;
+                this.data.batches[index].shift = value;  // Keep backward compatibility
                 this.renderRoutines();
                 this.autoSave();
+            },
+
+            // Regular batch update functions
+            updateRegularBatchName(index, value) {
+                this.data.regularBatches[index].name = value;
+                this.autoSave();
+            },
+
+            applyRegularBatchConfig() {
+                this.initRegularRoutine();
+                this.renderRoutines();  // Will render based on active tab
+                this.autoSave();
+                this.showToast('Regular batch configuration applied successfully!', 'success');
             },
 
             applyBatchConfig() {
@@ -1542,10 +2079,41 @@
                 return n + (s[(v - 20) % 10] || s[v] || s[0]);
             },
 
+            findCourse(courseCode) {
+                // Search through all semesters to find course
+                for (let sem = 1; sem <= 8; sem++) {
+                    const courses = this.data.courses[sem] || [];
+                    const course = courses.find(c => c.code === courseCode);
+                    if (course) return course;
+                }
+                return null;
+            },
+
+            switchBatchType(type) {
+                // Update active batch type
+                this.data.activeBatchType = type;
+                
+                // Update tab button styles
+                const tabs = document.querySelectorAll('.batch-type-tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // Re-render routines based on selected type
+                this.renderRoutines();
+            },
+
             renderRoutines() {
                 const container = document.getElementById('routine-main');
                 container.innerHTML = '';
 
+                // Check which batch type is active
+                if (this.data.activeBatchType === 'regular') {
+                    // Render regular batch routines (Phase 3)
+                    this.renderRegularRoutines();
+                    return;
+                }
+
+                // Render diploma batch routines (existing)
                 this.data.batches.forEach((batch) => {
                     const batchDiv = document.createElement('div');
                     batchDiv.className = 'batch-routine';
@@ -1593,6 +2161,262 @@
 
                     container.appendChild(batchDiv);
                 });
+            },
+
+            renderRegularRoutines() {
+                const container = document.getElementById('routine-main');
+                container.innerHTML = '';
+
+                this.data.regularBatches.forEach((batch) => {
+                    const batchDiv = document.createElement('div');
+                    batchDiv.className = 'batch-routine';
+
+                    // Header with logo
+                    const header = document.createElement('div');
+                    header.className = 'batch-routine-header';
+                    header.innerHTML = `
+                        <div class="logo-container">
+                            <img src="akmu.png" alt="AKMU Logo" onerror="this.style.display='none'">
+                        </div>
+                        <div class="header-text">
+                            <h1>Anwer Khan Modern University</h1>
+                            <h2>Department of Mechanical Engineering</h2>
+                            <h3>Class Routine - ${this.data.semesterName}</h3>
+                            <div class="batch-title">${batch.name} Batch - Regular</div>
+                        </div>
+                    `;
+                    batchDiv.appendChild(header);
+
+                    // Room number drop zone
+                    const roomDropZone = document.createElement('div');
+                    roomDropZone.className = 'regular-room-header';
+                    
+                    const hasRoom = this.data.regularBatchRooms[batch.name];
+                    roomDropZone.innerHTML = `
+                        <div class="regular-room-drop-zone${hasRoom ? ' has-room' : ''}" 
+                             data-batch="${batch.name}"
+                             ${hasRoom ? `onclick="app.removeRegularBatchRoom('${batch.name}')"` : ''}
+                             style="cursor: ${hasRoom ? 'pointer' : 'default'};">
+                            ${hasRoom ? `Room: ${hasRoom}` : 'Drop Room'}
+                        </div>
+                    `;
+                    batchDiv.appendChild(roomDropZone);
+
+                    // Create regular routine table
+                    const table = this.createRegularRoutineTable(batch);
+                    batchDiv.appendChild(table);
+
+                    // Add Faculty Contact info box
+                    const teacherBox = this.createRegularTeacherInfoBox(batch);
+                    batchDiv.appendChild(teacherBox);
+
+                    container.appendChild(batchDiv);
+                });
+            },
+
+            createRegularRoutineTable(batch) {
+                const table = document.createElement('table');
+                table.className = 'regular-routine-table';
+
+                // Table header with time slots
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                // First column: Days
+                headerRow.innerHTML = `<th class="day-column">Days</th>`;
+                
+                // Time slot columns (first 3 slots)
+                for (let i = 0; i < 3; i++) {
+                    const slot = this.data.regularTimeSlots.slots[i];
+                    const th = document.createElement('th');
+                    th.innerHTML = `${slot.start}-<br>${slot.end}`;
+                    headerRow.appendChild(th);
+                }
+                
+                // Prayer and lunch break column header (NO rowSpan)
+                const prayerTh = document.createElement('th');
+                prayerTh.className = 'prayer-lunch-col';
+                prayerTh.innerHTML = 'Prayer and<br>Lunch break';
+                prayerTh.style.background = '#f9f9f9';
+                prayerTh.style.color = '#000';
+                prayerTh.style.fontWeight = '700';
+                headerRow.appendChild(prayerTh);
+                
+                // Last time slot (2:00PM-4:00PM) - rightmost
+                const lastSlot = this.data.regularTimeSlots.slots[3];
+                const lastTh = document.createElement('th');
+                lastTh.innerHTML = `${lastSlot.start}-<br>${lastSlot.end}`;
+                headerRow.appendChild(lastTh);
+                
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+
+                // Table body with days
+                const tbody = document.createElement('tbody');
+                
+                this.data.regularTimeSlots.days.forEach((day, dayIndex) => {
+                    const row = document.createElement('tr');
+                    
+                    // Day name cell
+                    const dayCell = document.createElement('td');
+                    dayCell.className = 'day-cell';
+                    dayCell.textContent = day;
+                    row.appendChild(dayCell);
+                    
+                    // First 3 time slot cells
+                    for (let slotIndex = 0; slotIndex < 3; slotIndex++) {
+                        const cell = this.createRegularCell(batch, day, slotIndex);
+                        row.appendChild(cell);
+                    }
+                    
+                    // Prayer/lunch break cell - ONLY create on first row with rowSpan=4
+                    if (dayIndex === 0) {
+                        const breakCell = document.createElement('td');
+                        breakCell.className = 'prayer-lunch-col';
+                        breakCell.style.background = '#f9f9f9';
+                        breakCell.style.color = '#000';
+                        breakCell.style.fontWeight = '700';
+                        breakCell.style.verticalAlign = 'middle';
+                        breakCell.style.textAlign = 'center';
+                        breakCell.rowSpan = 4;  // Merge all 4 day rows
+                        breakCell.textContent = 'Prayer and Lunch break';
+                        row.appendChild(breakCell);
+                    }
+                    
+                    // Last time slot cell (2:00-4:00PM) - rightmost
+                    const lastCell = this.createRegularCell(batch, day, 3);
+                    row.appendChild(lastCell);
+                    
+                    tbody.appendChild(row);
+                });
+                
+                table.appendChild(tbody);
+                return table;
+            },
+
+            createRegularCell(batch, day, slotIndex) {
+                const cell = document.createElement('td');
+                cell.className = 'regular-routine-cell';
+                cell.dataset.batch = batch.name;
+                cell.dataset.day = day;
+                cell.dataset.slot = slotIndex;
+                
+                // Get existing data
+                const routineData = this.data.regularRoutine[batch.name];
+                if (routineData && routineData[day] && routineData[day][slotIndex]) {
+                    const cellData = routineData[day][slotIndex];
+                    
+                    if (cellData.course) {
+                        const courseSpan = document.createElement('span');
+                        courseSpan.className = 'cell-course';
+                        courseSpan.textContent = cellData.course;
+                        
+                        // Add tooltip
+                        const courseObj = this.findCourse(cellData.course);
+                        if (courseObj && courseObj.title) {
+                            courseSpan.title = courseObj.title;
+                        }
+                        
+                        // Add click to remove
+                        courseSpan.onclick = (e) => {
+                            e.stopPropagation();
+                            this.data.regularRoutine[batch.name][day][slotIndex].course = '';
+                            this.renderRoutines();
+                            this.autoSave();
+                        };
+                        courseSpan.style.cursor = 'pointer';
+                        
+                        cell.appendChild(courseSpan);
+                    }
+                    
+                    if (cellData.teacher) {
+                        const teacherSpan = document.createElement('span');
+                        teacherSpan.className = 'cell-teacher';
+                        teacherSpan.textContent = cellData.teacher;
+                        
+                        // Add tooltip
+                        const teacher = this.data.teachers.find(t => t.short === cellData.teacher);
+                        if (teacher && teacher.name) {
+                            teacherSpan.title = teacher.name;
+                        }
+                        
+                        // Add click to remove
+                        teacherSpan.onclick = (e) => {
+                            e.stopPropagation();
+                            this.data.regularRoutine[batch.name][day][slotIndex].teacher = '';
+                            this.renderRoutines();
+                            this.autoSave();
+                        };
+                        teacherSpan.style.cursor = 'pointer';
+                        
+                        cell.appendChild(teacherSpan);
+                    }
+                    
+                    if (cellData.room) {
+                        const roomSpan = document.createElement('span');
+                        roomSpan.className = 'cell-room';
+                        roomSpan.textContent = `Room: ${cellData.room}`;
+                        
+                        // Add click to remove
+                        roomSpan.onclick = (e) => {
+                            e.stopPropagation();
+                            this.data.regularRoutine[batch.name][day][slotIndex].room = '';
+                            this.renderRoutines();
+                            this.autoSave();
+                        };
+                        roomSpan.style.cursor = 'pointer';
+                        
+                        cell.appendChild(roomSpan);
+                    }
+                }
+                
+                return cell;
+            },
+
+            removeRegularBatchRoom(batchName) {
+                this.data.regularBatchRooms[batchName] = '';
+                this.renderRoutines();
+                this.autoSave();
+            },
+
+            createRegularTeacherInfoBox(batch) {
+                const box = document.createElement('div');
+                box.className = 'teacher-info-box';
+
+                const header = document.createElement('h4');
+                header.textContent = 'Faculty Contact Information';
+                box.appendChild(header);
+
+                const list = document.createElement('div');
+                list.className = 'teacher-info-list';
+
+                const teachersInBatch = new Set();
+                
+                // Collect all teachers from regular routine for this batch
+                const days = this.data.regularTimeSlots.days;
+                days.forEach(day => {
+                    const dayData = this.data.regularRoutine[batch.name]?.[day] || [];
+                    dayData.forEach(slot => {
+                        if (slot && slot.teacher) {
+                            teachersInBatch.add(slot.teacher);
+                        }
+                    });
+                });
+
+                let counter = 1;
+                teachersInBatch.forEach(shortName => {
+                    const teacher = this.data.teachers.find(t => t.short === shortName);
+                    if (teacher) {
+                        const item = document.createElement('div');
+                        item.className = 'teacher-info-item';
+                        item.innerHTML = `${counter}. ${teacher.short} - ${teacher.name}<br>(Phone: ${teacher.phone})`;
+                        list.appendChild(item);
+                        counter++;
+                    }
+                });
+
+                box.appendChild(list);
+                return box;
             },
 
             createRoutineTable(batch, day) {
@@ -1879,39 +2703,66 @@
                 });
 
                 document.addEventListener('dragend', (e) => {
-                    if (e.target.classList.contains('draggable-item')) {
+                    if (e.target.classList.contains('dragging')) {
                         e.target.classList.remove('dragging');
                     }
                 });
 
                 document.addEventListener('dragover', (e) => {
-                    const cell = e.target.closest('.routine-cell');
-                    const roomZone = e.target.closest('.room-drop-zone');
+                    // Block prayer/lunch column
+                    if (e.target.classList.contains('prayer-lunch-col') || 
+                        e.target.closest('.prayer-lunch-col')) {
+                        return;
+                    }
                     
-                    if (cell || roomZone) {
+                    const cell = e.target.closest('.routine-cell');
+                    const regularCell = e.target.closest('.regular-routine-cell');
+                    const roomZone = e.target.closest('.room-drop-zone');
+                    const regularRoomZone = e.target.closest('.regular-room-drop-zone');
+                    
+                    if (cell || regularCell || roomZone || regularRoomZone) {
                         e.preventDefault();
                         if (cell) cell.classList.add('drop-zone');
+                        if (regularCell) regularCell.style.background = '#e3f2fd';
                         if (roomZone && !roomZone.classList.contains('has-room')) {
                             roomZone.style.background = '#e3f2fd';
+                        }
+                        if (regularRoomZone && !regularRoomZone.classList.contains('has-room')) {
+                            regularRoomZone.style.background = '#e3f2fd';
                         }
                     }
                 });
 
                 document.addEventListener('dragleave', (e) => {
                     const cell = e.target.closest('.routine-cell');
+                    const regularCell = e.target.closest('.regular-routine-cell');
                     const roomZone = e.target.closest('.room-drop-zone');
+                    const regularRoomZone = e.target.closest('.regular-room-drop-zone');
                     
                     if (cell) cell.classList.remove('drop-zone');
+                    if (regularCell) regularCell.style.background = '';
                     if (roomZone && !roomZone.classList.contains('has-room')) {
                         roomZone.style.background = 'transparent';
+                    }
+                    if (regularRoomZone && !regularRoomZone.classList.contains('has-room')) {
+                        regularRoomZone.style.background = 'transparent';
                     }
                 });
 
                 document.addEventListener('drop', (e) => {
+                    // Block prayer/lunch column
+                    if (e.target.classList.contains('prayer-lunch-col') || 
+                        e.target.closest('.prayer-lunch-col')) {
+                        return;
+                    }
+                    
                     const cell = e.target.closest('.routine-cell');
+                    const regularCell = e.target.closest('.regular-routine-cell');
                     const roomZone = e.target.closest('.room-drop-zone');
+                    const regularRoomZone = e.target.closest('.regular-room-drop-zone');
                     
                     if (cell) {
+                        // Diploma routine cell drop (existing)
                         e.preventDefault();
                         cell.classList.remove('drop-zone');
 
@@ -1943,7 +2794,42 @@
                         this.renderSidebar();
                         this.renderTeachersSchedule();
                         this.autoSave();
+                    } else if (regularCell) {
+                        // Regular routine cell drop (new)
+                        e.preventDefault();
+                        regularCell.style.background = '';
+
+                        const type = e.dataTransfer.getData('type');
+                        const value = e.dataTransfer.getData('value');
+                        
+                        const batch = regularCell.dataset.batch;
+                        const day = regularCell.dataset.day;
+                        const slot = parseInt(regularCell.dataset.slot);
+
+                        // Initialize if needed
+                        if (!this.data.regularRoutine[batch]) {
+                            this.data.regularRoutine[batch] = {};
+                        }
+                        if (!this.data.regularRoutine[batch][day]) {
+                            this.data.regularRoutine[batch][day] = Array(4).fill(null).map(() => ({ course: '', teacher: '', room: '' }));
+                        }
+                        if (!this.data.regularRoutine[batch][day][slot]) {
+                            this.data.regularRoutine[batch][day][slot] = { course: '', teacher: '', room: '' };
+                        }
+
+                        // Store based on type
+                        if (type === 'course') {
+                            this.data.regularRoutine[batch][day][slot].course = value;
+                        } else if (type === 'teacher') {
+                            this.data.regularRoutine[batch][day][slot].teacher = value;
+                        } else if (type === 'room') {
+                            this.data.regularRoutine[batch][day][slot].room = value;
+                        }
+
+                        this.renderRoutines();
+                        this.autoSave();
                     } else if (roomZone) {
+                        // Diploma room zone drop (existing)
                         e.preventDefault();
                         roomZone.style.background = '';
 
@@ -1959,6 +2845,20 @@
                             this.renderRoutines();
                             this.autoSave();
                         }
+                    } else if (regularRoomZone) {
+                        // Regular room zone drop (new)
+                        e.preventDefault();
+                        regularRoomZone.style.background = '';
+
+                        const type = e.dataTransfer.getData('type');
+                        const value = e.dataTransfer.getData('value');
+                        
+                        if (type === 'room') {
+                            const batch = regularRoomZone.dataset.batch;
+                            this.data.regularBatchRooms[batch] = value;
+                            this.renderRoutines();
+                            this.autoSave();
+                        }
                     }
                 });
             },
@@ -1966,6 +2866,20 @@
             renderTeachersSchedule() {
                 const container = document.getElementById('teachers-schedule-container');
                 container.innerHTML = '';
+
+                // === DIPLOMA BATCHES SECTION ===
+                const diplomaSection = document.createElement('div');
+                diplomaSection.style.marginBottom = '60px';
+                
+                const diplomaTitle = document.createElement('h2');
+                diplomaTitle.textContent = 'Diploma Batches Schedule';
+                diplomaTitle.style.marginBottom = '20px';
+                diplomaTitle.style.fontWeight = '800';
+                diplomaTitle.style.fontSize = '20px';
+                diplomaTitle.style.color = '#2c3e50';
+                diplomaTitle.style.borderBottom = '3px solid #3498db';
+                diplomaTitle.style.paddingBottom = '10px';
+                diplomaSection.appendChild(diplomaTitle);
 
                 ['Friday', 'Saturday'].forEach(dayName => {
                     const day = dayName.toLowerCase();
@@ -2008,7 +2922,44 @@
 
                     const tbody = document.createElement('tbody');
 
-                    this.data.teachers.forEach(teacher => {
+                    // Filter teachers who have classes on this day
+                    const teachersWithClasses = this.data.teachers.filter(teacher => {
+                        let hasClass = false;
+                        
+                        if (day === 'friday') {
+                            // Check morning slots
+                            for (let slotIdx = 0; slotIdx < this.data.timeSlots.friday.morning.length; slotIdx++) {
+                                const assignments = this.getTeacherAssignmentsForSlot(teacher.short, day, slotIdx, 'morning');
+                                if (assignments.length > 0) {
+                                    hasClass = true;
+                                    break;
+                                }
+                            }
+                            // Check afternoon slots
+                            if (!hasClass) {
+                                for (let slotIdx = 0; slotIdx < this.data.timeSlots.friday.afternoon.length; slotIdx++) {
+                                    const assignments = this.getTeacherAssignmentsForSlot(teacher.short, day, slotIdx, 'afternoon');
+                                    if (assignments.length > 0) {
+                                        hasClass = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            // Saturday
+                            for (let slotIdx = 0; slotIdx < this.data.timeSlots.saturday.length; slotIdx++) {
+                                const assignments = this.getTeacherAssignmentsForSlot(teacher.short, day, slotIdx, null);
+                                if (assignments.length > 0) {
+                                    hasClass = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        return hasClass;
+                    });
+
+                    teachersWithClasses.forEach(teacher => {
                         const row = document.createElement('tr');
                         
                         const nameCell = document.createElement('td');
@@ -2065,8 +3016,101 @@
 
                     table.appendChild(tbody);
                     dayDiv.appendChild(table);
-                    container.appendChild(dayDiv);
+                    diplomaSection.appendChild(dayDiv);
                 });
+                
+                container.appendChild(diplomaSection);
+
+                // === REGULAR BATCHES SECTION ===
+                const regularSection = document.createElement('div');
+                regularSection.style.marginTop = '60px';
+                
+                const regularTitle = document.createElement('h2');
+                regularTitle.textContent = 'Regular Batches Schedule';
+                regularTitle.style.marginBottom = '20px';
+                regularTitle.style.fontWeight = '800';
+                regularTitle.style.fontSize = '20px';
+                regularTitle.style.color = '#2c3e50';
+                regularTitle.style.borderBottom = '3px solid #27ae60';
+                regularTitle.style.paddingBottom = '10px';
+                regularSection.appendChild(regularTitle);
+
+                ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(dayName => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.style.marginBottom = '40px';
+
+                    const header = document.createElement('h3');
+                    header.textContent = `${dayName} Schedule`;
+                    header.style.marginBottom = '15px';
+                    header.style.fontWeight = '700';
+                    dayDiv.appendChild(header);
+
+                    const table = document.createElement('table');
+                    table.className = 'teachers-schedule-table';
+
+                    const thead = document.createElement('thead');
+                    const headerRow = document.createElement('tr');
+                    headerRow.innerHTML = '<th>Faculty</th>';
+                    
+                    // Regular batch time slots (4 slots)
+                    this.data.regularTimeSlots.slots.forEach(slot => {
+                        const th = document.createElement('th');
+                        th.innerHTML = `${slot.start}-<br>${slot.end}`;
+                        headerRow.appendChild(th);
+                    });
+                    
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+
+                    const tbody = document.createElement('tbody');
+
+                    // Filter teachers who have classes on this day
+                    const teachersWithClasses = this.data.teachers.filter(teacher => {
+                        let hasClass = false;
+                        
+                        for (let slotIdx = 0; slotIdx < 4; slotIdx++) {
+                            const assignments = this.getRegularTeacherAssignmentsForSlot(teacher.short, dayName, slotIdx);
+                            if (assignments.length > 0) {
+                                hasClass = true;
+                                break;
+                            }
+                        }
+                        
+                        return hasClass;
+                    });
+
+                    teachersWithClasses.forEach(teacher => {
+                        const row = document.createElement('tr');
+                        
+                        const nameCell = document.createElement('td');
+                        nameCell.className = 'teacher-name-cell';
+                        nameCell.textContent = `${teacher.name} (${teacher.short})`;
+                        row.appendChild(nameCell);
+
+                        // Check each time slot
+                        for (let slotIdx = 0; slotIdx < 4; slotIdx++) {
+                            const cell = document.createElement('td');
+                            const assignments = this.getRegularTeacherAssignmentsForSlot(teacher.short, dayName, slotIdx);
+                            
+                            if (assignments.length > 0) {
+                                cell.innerHTML = assignments.map(a => {
+                                    const roomNum = this.data.regularBatchRooms[a.batch] || '';
+                                    return `${a.course}<br><small>${a.batch} (Reg)${roomNum ? ' (R:' + roomNum + ')' : ''}</small>`;
+                                }).join('<br>');
+                            }
+                            
+                            row.appendChild(cell);
+                        }
+
+                        tbody.appendChild(row);
+                    });
+
+                    table.appendChild(tbody);
+                    dayDiv.appendChild(table);
+                    regularSection.appendChild(dayDiv);
+                });
+                
+                container.appendChild(regularSection);
             },
 
             getTeacherAssignmentsForSlot(teacherShort, day, slot, shift) {
@@ -2094,7 +3138,242 @@
                 return assignments;
             },
 
+            getRegularTeacherAssignmentsForSlot(teacherShort, dayName, slotIndex) {
+                const assignments = [];
+                
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const routineData = this.data.regularRoutine[batchName];
+                    
+                    if (routineData && routineData[dayName] && routineData[dayName][slotIndex]) {
+                        const slot = routineData[dayName][slotIndex];
+                        if (slot.teacher === teacherShort && slot.course) {
+                            assignments.push({
+                                batch: batchName,
+                                course: slot.course
+                            });
+                        }
+                    }
+                });
+
+                return assignments;
+            },
+
+            renderCourseDistribution() {
+                const container = document.getElementById('course-distribution-container');
+                container.innerHTML = '';
+
+                // Create card with header
+                const card = document.createElement('div');
+                card.className = 'course-distribution-card';
+
+                // Header with logo (same as class routine)
+                const header = document.createElement('div');
+                header.className = 'batch-routine-header';
+                header.innerHTML = `
+                    <div class="logo-container">
+                        <img src="akmu.png" alt="AKMU Logo" onerror="this.style.display='none'">
+                    </div>
+                    <div class="header-text">
+                        <h1>Anwer Khan Modern University</h1>
+                        <h2>Department of Mechanical Engineering</h2>
+                        <h3>Course Distribution - ${this.data.semesterName}</h3>
+                    </div>
+                `;
+                card.appendChild(header);
+
+                // Create table
+                const table = document.createElement('table');
+                table.className = 'course-distribution-table';
+
+                // Table header
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th class="sl-no">Sl No.</th>
+                        <th class="faculty-name">Faculty Name</th>
+                        <th class="course-info">Courses Code and Title</th>
+                        <th class="batch-section">Batch/Section</th>
+                        <th class="credits">Credits</th>
+                        <th class="total-credits">Total Credits</th>
+                    </tr>
+                `;
+                table.appendChild(thead);
+
+                // Table body
+                const tbody = document.createElement('tbody');
+                
+                // Collect course data for each teacher
+                let slNo = 1;
+                this.data.teachers.forEach(teacher => {
+                    const teacherCourses = [];
+                    
+                    // DIPLOMA BATCHES: Find all courses assigned to this teacher
+                    Object.keys(this.data.routine).forEach(key => {
+                        const [batch, section] = key.split('-');
+                        
+                        ['friday', 'saturday'].forEach(day => {
+                            const dayData = this.data.routine[key][day];
+                            dayData.forEach(slot => {
+                                if (slot.teacher === teacher.short && slot.course) {
+                                    // Find course details
+                                    let courseTitle = '';
+                                    let courseCredits = 0;
+                                    
+                                    for (let sem = 1; sem <= 8; sem++) {
+                                        const course = (this.data.courses[sem] || []).find(c => c.code === slot.course);
+                                        if (course) {
+                                            courseTitle = course.title || '';
+                                            courseCredits = parseFloat(course.credits) || 0;
+                                            break;
+                                        }
+                                    }
+                                    
+                                    // Check if this exact combination already exists
+                                    const exists = teacherCourses.some(tc => 
+                                        tc.code === slot.course && 
+                                        tc.batch === batch && 
+                                        tc.section === section &&
+                                        tc.type === 'diploma'
+                                    );
+                                    
+                                    if (!exists) {
+                                        teacherCourses.push({
+                                            code: slot.course,
+                                            title: courseTitle,
+                                            batch: batch,
+                                            section: section,
+                                            credits: courseCredits,
+                                            type: 'diploma'
+                                        });
+                                    }
+                                }
+                            });
+                        });
+                    });
+                    
+                    // REGULAR BATCHES: Find all courses assigned to this teacher
+                    this.data.regularBatches.forEach(batch => {
+                        const batchName = batch.name;
+                        const routineData = this.data.regularRoutine[batchName];
+                        
+                        if (routineData) {
+                            ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                                const dayData = routineData[day] || [];
+                                dayData.forEach(slot => {
+                                    if (slot && slot.teacher === teacher.short && slot.course) {
+                                        // Find course details
+                                        let courseTitle = '';
+                                        let courseCredits = 0;
+                                        
+                                        for (let sem = 1; sem <= 8; sem++) {
+                                            const course = (this.data.courses[sem] || []).find(c => c.code === slot.course);
+                                            if (course) {
+                                                courseTitle = course.title || '';
+                                                courseCredits = parseFloat(course.credits) || 0;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        // Check if this exact combination already exists
+                                        const exists = teacherCourses.some(tc => 
+                                            tc.code === slot.course && 
+                                            tc.batch === batchName && 
+                                            tc.type === 'regular'
+                                        );
+                                        
+                                        if (!exists) {
+                                            teacherCourses.push({
+                                                code: slot.course,
+                                                title: courseTitle,
+                                                batch: batchName,
+                                                section: '',  // Regular batches don't have sections
+                                                credits: courseCredits,
+                                                type: 'regular'
+                                            });
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    });
+
+                    // Calculate total credits
+                    const totalCredits = teacherCourses.reduce((sum, c) => sum + c.credits, 0);
+
+                    // Create rows for this teacher
+                    if (teacherCourses.length > 0) {
+                        teacherCourses.forEach((course, index) => {
+                            const row = document.createElement('tr');
+                            
+                            // Sl No - only in first row (merged)
+                            if (index === 0) {
+                                const slCell = document.createElement('td');
+                                slCell.className = 'sl-no';
+                                slCell.textContent = String(slNo).padStart(2, '0') + '.';
+                                slCell.rowSpan = teacherCourses.length;
+                                row.appendChild(slCell);
+                                
+                                // Faculty Name - only in first row (merged)
+                                const nameCell = document.createElement('td');
+                                nameCell.className = 'faculty-name';
+                                nameCell.textContent = teacher.name;
+                                nameCell.rowSpan = teacherCourses.length;
+                                row.appendChild(nameCell);
+                            }
+                            
+                            // Course Code and Title
+                            const courseCell = document.createElement('td');
+                            courseCell.className = 'course-info';
+                            courseCell.textContent = course.title ? 
+                                `${course.code}: ${course.title}` : 
+                                course.code;
+                            row.appendChild(courseCell);
+                            
+                            // Batch/Section - mark regular batches with (Reg)
+                            const batchCell = document.createElement('td');
+                            batchCell.className = 'batch-section';
+                            if (course.type === 'regular') {
+                                batchCell.textContent = `${course.batch} (Reg)`;
+                            } else {
+                                batchCell.textContent = `${course.batch}-${course.section}`;
+                            }
+                            row.appendChild(batchCell);
+                            
+                            // Credits
+                            const creditsCell = document.createElement('td');
+                            creditsCell.className = 'credits';
+                            creditsCell.textContent = course.credits.toFixed(2);
+                            row.appendChild(creditsCell);
+                            
+                            // Total Credits - only in first row (merged)
+                            if (index === 0) {
+                                const totalCell = document.createElement('td');
+                                totalCell.className = 'total-credits';
+                                totalCell.textContent = totalCredits.toFixed(2);
+                                totalCell.rowSpan = teacherCourses.length;
+                                row.appendChild(totalCell);
+                            }
+                            
+                            tbody.appendChild(row);
+                        });
+                        
+                        slNo++;
+                    }
+                });
+
+                table.appendChild(tbody);
+                card.appendChild(table);
+                container.appendChild(card);
+            },
+
             checkOverlap() {
+                // Check if we're on regular batch type
+                if (this.data.activeBatchType === 'regular') {
+                    this.checkRegularOverlap();
+                    return;
+                }
+                
                 const overlaps = [];
                 const debugInfo = {
                     courseChecked: 0,
@@ -2483,6 +3762,357 @@ message += '\n';
                 return message;
             },
 
+            checkRegularOverlap() {
+                const overlaps = [];
+                
+                // Clear previous highlights (if any)
+                document.querySelectorAll('.regular-routine-cell.overlap').forEach(cell => {
+                    cell.classList.remove('overlap');
+                });
+                
+                // === 1. COURSE OVERLAP CHECK ===
+                // Check if same course appears multiple times in same batch on same day
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const routineData = this.data.regularRoutine[batchName];
+                    
+                    if (routineData) {
+                        ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                            const dayData = routineData[day] || [];
+                            const courses = dayData.map(slot => slot?.course).filter(c => c);
+                            const duplicates = courses.filter((course, index) => courses.indexOf(course) !== index);
+                            
+                            if (duplicates.length > 0) {
+                                duplicates.forEach(course => {
+                                    dayData.forEach((slot, slotIdx) => {
+                                        if (slot && slot.course === course) {
+                                            overlaps.push({
+                                                type: 'course',
+                                                batch: batchName,
+                                                day,
+                                                slot: slotIdx,
+                                                value: course
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+                
+                // === 2. TEACHER OVERLAP CHECK ===
+                // Check if same teacher is scheduled in multiple batches at same time
+                ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                    for (let slotIdx = 0; slotIdx < 4; slotIdx++) {
+                        const teachersInSlot = {};
+                        
+                        this.data.regularBatches.forEach(batch => {
+                            const batchName = batch.name;
+                            const routineData = this.data.regularRoutine[batchName];
+                            
+                            if (routineData && routineData[day] && routineData[day][slotIdx]) {
+                                const slot = routineData[day][slotIdx];
+                                if (slot.teacher) {
+                                    if (!teachersInSlot[slot.teacher]) {
+                                        teachersInSlot[slot.teacher] = [];
+                                    }
+                                    teachersInSlot[slot.teacher].push({ batch: batchName });
+                                }
+                            }
+                        });
+                        
+                        // Check for duplicates
+                        Object.keys(teachersInSlot).forEach(teacher => {
+                            if (teachersInSlot[teacher].length > 1) {
+                                teachersInSlot[teacher].forEach(({ batch }) => {
+                                    overlaps.push({
+                                        type: 'teacher',
+                                        batch,
+                                        day,
+                                        slot: slotIdx,
+                                        value: teacher
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+                
+                // === 3. ROOM OVERLAP CHECK ===
+                // Check if same room is used by multiple batches at same time
+                ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                    for (let slotIdx = 0; slotIdx < 4; slotIdx++) {
+                        const roomsInSlot = {};
+                        
+                        this.data.regularBatches.forEach(batch => {
+                            const batchName = batch.name;
+                            const batchRoom = this.data.regularBatchRooms[batchName];
+                            
+                            if (batchRoom) {
+                                const routineData = this.data.regularRoutine[batchName];
+                                
+                                // Check if there's actually a class scheduled
+                                if (routineData && routineData[day] && routineData[day][slotIdx]) {
+                                    const slot = routineData[day][slotIdx];
+                                    if (slot.course || slot.teacher) {
+                                        if (!roomsInSlot[batchRoom]) {
+                                            roomsInSlot[batchRoom] = [];
+                                        }
+                                        roomsInSlot[batchRoom].push({ batch: batchName });
+                                    }
+                                }
+                            }
+                        });
+                        
+                        // Check for duplicate room usage
+                        Object.keys(roomsInSlot).forEach(room => {
+                            if (roomsInSlot[room].length > 1) {
+                                roomsInSlot[room].forEach(({ batch }) => {
+                                    overlaps.push({
+                                        type: 'room',
+                                        batch,
+                                        day,
+                                        slot: slotIdx,
+                                        value: room
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
+                
+                // === 4. BATCH ROOM NUMBER OVERLAP CHECK (TOP LEFT DROP ZONE) ===
+                // Check if same room number is assigned to multiple batches in the header drop zone
+                const batchRoomAssignments = {};
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const roomNum = this.data.regularBatchRooms[batchName];
+                    
+                    if (roomNum) {
+                        if (!batchRoomAssignments[roomNum]) {
+                            batchRoomAssignments[roomNum] = [];
+                        }
+                        batchRoomAssignments[roomNum].push(batchName);
+                    }
+                });
+                
+                // Find duplicate room assignments
+                Object.keys(batchRoomAssignments).forEach(roomNum => {
+                    const batches = batchRoomAssignments[roomNum];
+                    if (batches.length > 1) {
+                        batches.forEach(batchName => {
+                            overlaps.push({
+                                type: 'batch-room-duplicate',
+                                batch: batchName,
+                                value: roomNum,
+                                batches: batches  // All batches using this room
+                            });
+                        });
+                    }
+                });
+                
+                // === 5. TEACHER WITHOUT COURSE CHECK ===
+                // Check for cells with teacher assigned but no course
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const routineData = this.data.regularRoutine[batchName];
+                    
+                    if (routineData) {
+                        ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                            const dayData = routineData[day] || [];
+                            dayData.forEach((slot, slotIdx) => {
+                                if (slot && slot.teacher && !slot.course) {
+                                    overlaps.push({
+                                        type: 'no-course',
+                                        batch: batchName,
+                                        day,
+                                        slot: slotIdx,
+                                        value: slot.teacher
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+                
+                // === 6. COURSE WITHOUT TEACHER CHECK ===
+                // Check for cells with course assigned but no teacher
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const routineData = this.data.regularRoutine[batchName];
+                    
+                    if (routineData) {
+                        ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                            const dayData = routineData[day] || [];
+                            dayData.forEach((slot, slotIdx) => {
+                                if (slot && slot.course && !slot.teacher) {
+                                    overlaps.push({
+                                        type: 'no-teacher',
+                                        batch: batchName,
+                                        day,
+                                        slot: slotIdx,
+                                        value: slot.course
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+                
+                // === 7. MISSING BATCH ROOM NUMBER CHECK ===
+                // Check if batch has classes but no room number assigned
+                this.data.regularBatches.forEach(batch => {
+                    const batchName = batch.name;
+                    const roomNum = this.data.regularBatchRooms[batchName];
+                    const routineData = this.data.regularRoutine[batchName];
+                    
+                    if (!roomNum && routineData) {
+                        // Check if this batch has any classes
+                        let hasClasses = false;
+                        ['Saturday', 'Sunday', 'Monday', 'Thursday'].forEach(day => {
+                            const dayData = routineData[day] || [];
+                            dayData.forEach(slot => {
+                                if (slot && (slot.course || slot.teacher)) {
+                                    hasClasses = true;
+                                }
+                            });
+                        });
+                        
+                        if (hasClasses) {
+                            overlaps.push({
+                                type: 'no-batch-room',
+                                batch: batchName
+                            });
+                        }
+                    }
+                });
+                
+                // === HIGHLIGHT OVERLAPS ===
+                overlaps.forEach(overlap => {
+                    const cell = document.querySelector(
+                        `.regular-routine-cell[data-batch="${overlap.batch}"][data-day="${overlap.day}"][data-slot="${overlap.slot}"]`
+                    );
+                    if (cell) {
+                        cell.classList.add('overlap');
+                        cell.style.background = '#ffebee';
+                        cell.style.border = '2px solid var(--danger-color)';
+                    }
+                });
+                
+                // === DISPLAY RESULTS ===
+                if (overlaps.length === 0) {
+                    this.showToast('✅ No overlaps found in Regular batch routines!', 'success');
+                } else {
+                    // Group overlaps by type
+                    const grouped = {};
+                    overlaps.forEach(o => {
+                        if (!grouped[o.type]) grouped[o.type] = [];
+                        grouped[o.type].push(o);
+                    });
+                    
+                    let message = `⚠️ Found ${overlaps.length} overlap(s) in Regular batches:\n\n`;
+                    
+                    if (grouped.course) {
+                        message += `📚 COURSE OVERLAPS (${grouped.course.length}):\n`;
+                        const uniqueCourses = {};
+                        grouped.course.forEach(o => {
+                            const key = `${o.batch}-${o.day}-${o.value}`;
+                            if (!uniqueCourses[key]) {
+                                uniqueCourses[key] = [];
+                            }
+                            const timeSlot = this.data.regularTimeSlots.slots[o.slot];
+                            uniqueCourses[key].push(`${timeSlot.start}-${timeSlot.end}`);
+                        });
+                        Object.keys(uniqueCourses).forEach(key => {
+                            const [batch, day, course] = key.split('-');
+                            message += `  • ${course} appears ${uniqueCourses[key].length} times in ${batch} (Reg) on ${day}\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped.teacher) {
+                        message += `👨‍🏫 TEACHER OVERLAPS (${grouped.teacher.length}):\n`;
+                        const uniqueTeachers = {};
+                        grouped.teacher.forEach(o => {
+                            const key = `${o.day}-${o.slot}-${o.value}`;
+                            if (!uniqueTeachers[key]) {
+                                uniqueTeachers[key] = [];
+                            }
+                            uniqueTeachers[key].push(o.batch);
+                        });
+                        Object.keys(uniqueTeachers).forEach(key => {
+                            const [day, slotIdx, teacher] = key.split('-');
+                            const timeSlot = this.data.regularTimeSlots.slots[parseInt(slotIdx)];
+                            const batches = [...new Set(uniqueTeachers[key])].join(', ');
+                            message += `  • ${teacher} scheduled in ${uniqueTeachers[key].length} batches on ${day} at ${timeSlot.start}-${timeSlot.end} (${batches})\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped.room) {
+                        message += `🏢 ROOM OVERLAPS (${grouped.room.length}):\n`;
+                        const uniqueRooms = {};
+                        grouped.room.forEach(o => {
+                            const key = `${o.day}-${o.slot}-${o.value}`;
+                            if (!uniqueRooms[key]) {
+                                uniqueRooms[key] = [];
+                            }
+                            uniqueRooms[key].push(o.batch);
+                        });
+                        Object.keys(uniqueRooms).forEach(key => {
+                            const [day, slotIdx, room] = key.split('-');
+                            const timeSlot = this.data.regularTimeSlots.slots[parseInt(slotIdx)];
+                            const batches = [...new Set(uniqueRooms[key])].join(', ');
+                            message += `  • Room ${room} used by ${uniqueRooms[key].length} batches on ${day} at ${timeSlot.start}-${timeSlot.end} (${batches})\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped['batch-room-duplicate']) {
+                        message += `🚪 BATCH ROOM NUMBER DUPLICATES (${grouped['batch-room-duplicate'].length}):\n`;
+                        const uniqueBatchRooms = {};
+                        grouped['batch-room-duplicate'].forEach(o => {
+                            if (!uniqueBatchRooms[o.value]) {
+                                uniqueBatchRooms[o.value] = o.batches;
+                            }
+                        });
+                        Object.keys(uniqueBatchRooms).forEach(roomNum => {
+                            const batches = uniqueBatchRooms[roomNum].map(b => `${b} Batch`).join(', ');
+                            message += `  • Same room no - ${roomNum} allotted for multiple batches (${batches})\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped['no-course']) {
+                        message += `📚 MISSING COURSES (${grouped['no-course'].length}):\n`;
+                        grouped['no-course'].forEach(o => {
+                            const timeSlot = this.data.regularTimeSlots.slots[o.slot];
+                            message += `  • No course assigned on ${o.batch} batch ${o.day} ${timeSlot.start}-${timeSlot.end}\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped['no-teacher']) {
+                        message += `👨‍🏫 MISSING FACULTY (${grouped['no-teacher'].length}):\n`;
+                        grouped['no-teacher'].forEach(o => {
+                            const timeSlot = this.data.regularTimeSlots.slots[o.slot];
+                            message += `  • No faculty is assigned on ${o.batch} batch ${o.day} ${timeSlot.start}-${timeSlot.end}\n`;
+                        });
+                        message += '\n';
+                    }
+                    
+                    if (grouped['no-batch-room']) {
+                        message += `🚪 MISSING BATCH ROOM NUMBERS (${grouped['no-batch-room'].length}):\n`;
+                        grouped['no-batch-room'].forEach(o => {
+                            message += `  • No room no is allotted for ${o.batch} Batch\n`;
+                        });
+                    }
+                    
+                    this.showToast(message, 'warning');
+                }
+            },
+
             showToast(message, type = 'info') {
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
@@ -2500,12 +4130,20 @@ message += '\n';
                 const data = {
                     semesterName: this.data.semesterName,
                     batches: this.data.batches,
+                    diplomaBatches: this.data.diplomaBatches,
+                    regularBatches: this.data.regularBatches,
                     courses: this.data.courses,
                     teachers: this.data.teachers,
                     rooms: this.data.rooms,
                     routine: this.data.routine,
+                    regularRoutine: this.data.regularRoutine,
                     sectionRooms: this.data.sectionRooms,
-                    timeSlots: this.data.timeSlots
+                    regularBatchRooms: this.data.regularBatchRooms,
+                    timeSlots: this.data.timeSlots,
+                    regularTimeSlots: this.data.regularTimeSlots,
+                    activeBatchType: this.data.activeBatchType,
+                    activeBatchConfigTab: this.data.activeBatchConfigTab,
+                    currentSemester: this.data.currentSemester
                 };
 
                 const dataStr = JSON.stringify(data, null, 2);
@@ -2536,17 +4174,25 @@ message += '\n';
                                 this.data = {
                                     semesterName: loadedData.semesterName || 'Fall 2025',
                                     batches: loadedData.batches || this.data.batches,
+                                    diplomaBatches: loadedData.diplomaBatches || this.data.diplomaBatches,
+                                    regularBatches: loadedData.regularBatches || this.data.regularBatches,
                                     courses: loadedData.courses || this.data.courses,
                                     teachers: loadedData.teachers || this.data.teachers,
                                     rooms: loadedData.rooms || this.data.rooms,
                                     routine: loadedData.routine || {},
+                                    regularRoutine: loadedData.regularRoutine || {},
                                     sectionRooms: loadedData.sectionRooms || {},
+                                    regularBatchRooms: loadedData.regularBatchRooms || {},
                                     timeSlots: loadedData.timeSlots || this.data.timeSlots,
-                                    currentSemester: 1
+                                    regularTimeSlots: loadedData.regularTimeSlots || this.data.regularTimeSlots,
+                                    activeBatchType: loadedData.activeBatchType || 'diploma',
+                                    activeBatchConfigTab: loadedData.activeBatchConfigTab || 'diploma',
+                                    currentSemester: loadedData.currentSemester || 1
                                 };
                                 localStorage.removeItem('classRoutineData');
                                 this.autoSave();
                                 this.initRoutine();
+                                this.initRegularRoutine();
                                 this.renderBatchConfig();
                                 this.renderInfoTab();
                                 this.renderRoutines();
@@ -2573,7 +4219,9 @@ message += '\n';
                     }
                 });
 
-                if (activeTabIndex !== 1) {
+                // If on Settings tab (index 3), switch to Class Routine
+                // Otherwise, print whichever tab is active
+                if (activeTabIndex === 3) {
                     this.switchTab(0);
                 }
                 
@@ -2583,15 +4231,24 @@ message += '\n';
             },
 
             clearAll() {
-                if (confirm('Are you sure you want to clear all routine data? This cannot be undone.')) {
-                    this.data.routine = {};
-                    this.data.sectionRooms = {};
-                    this.initRoutine();
+                const batchType = this.data.activeBatchType === 'regular' ? 'Regular' : 'Diploma';
+                if (confirm(`Are you sure you want to clear all ${batchType} routine data? This cannot be undone.`)) {
+                    if (this.data.activeBatchType === 'regular') {
+                        // Clear regular routine data
+                        this.data.regularRoutine = {};
+                        this.data.regularBatchRooms = {};
+                        this.initRegularRoutine();
+                    } else {
+                        // Clear diploma routine data
+                        this.data.routine = {};
+                        this.data.sectionRooms = {};
+                        this.initRoutine();
+                    }
                     this.renderRoutines();
                     this.renderSidebar();
                     this.renderTeachersSchedule();
                     this.autoSave();
-                    this.showToast('All routine data cleared!', 'success');
+                    this.showToast(`All ${batchType} routine data cleared!`, 'success');
                 }
             }
         };
